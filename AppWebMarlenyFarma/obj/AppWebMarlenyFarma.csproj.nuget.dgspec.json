@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\source\\repos\\MarlenyFarmaFinal\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj": {}
+    "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\source\\repos\\MarlenyFarmaFinal\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj": {
+    "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\source\\repos\\MarlenyFarmaFinal\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj",
         "projectName": "AppWebMarlenyFarma",
-        "projectPath": "C:\\Users\\Administrator\\source\\repos\\MarlenyFarmaFinal\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\source\\repos\\MarlenyFarmaFinal\\AppWebMarlenyFarma\\obj\\",
+        "outputPath": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
