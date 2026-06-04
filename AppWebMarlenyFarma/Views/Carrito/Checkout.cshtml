@@ -1,0 +1,137 @@
+﻿@model AppWebMarlenyFarma.Models.Carrito
+
+@{
+    ViewData["Title"] = "Checkout - MarlenyFarma";
+}
+
+<div class="container py-5">
+    <h2 class="fw-bold mb-4">Finalizar Compra</h2>
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Datos de Envío</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="@Url.Action("ConfirmarPedido", "Carrito")">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre Completo*</label>
+                                <input type="text" name="nombreCliente" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email*</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono*</label>
+                                <input type="tel" name="telefono" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Dirección de Entrega*</label>
+                                <input type="text" name="direccion" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Notas (Opcional)</label>
+                            <textarea name="notas" class="form-control" rows="3" placeholder="Ej: Apartado XXX, especificaciones..."></textarea>
+                        </div>
+
+                        <hr>
+
+                        <h5 class="fw-bold mb-3">Método de Pago</h5>
+
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="paypal" value="paypal" checked>
+                            <label class="form-check-label" for="paypal">
+                                <i class="fab fa-paypal text-primary"></i> PayPal
+                            </label>
+                        </div>
+
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="tarjeta" value="tarjeta">
+                            <label class="form-check-label" for="tarjeta">
+                                <i class="fas fa-credit-card text-danger"></i> Tarjeta de Crédito/Débito
+                            </label>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="metodoPago" id="transferencia" value="transferencia">
+                            <label class="form-check-label" for="transferencia">
+                                <i class="fas fa-university text-info"></i> Transferencia Bancaria
+                            </label>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="terminos" required>
+                            <label class="form-check-label" for="terminos">
+                                Acepto los términos y condiciones
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-lg w-100">
+                            <i class="fas fa-check-circle"></i> Confirmar Pedido
+                        </button>
+                        <a href="@Url.Action("Index", "Carrito")" class="btn btn-outline-secondary w-100 mt-2">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Resumen del Pedido</h5>
+                </div>
+                <div class="card-body">
+                    @{
+                        
+                        var subtotal = Model.ObtenerTotal();
+                        var igv = subtotal * 0.18m;
+                        var envio = 10m;
+                        var total = subtotal + igv + envio;
+                    }
+
+                    @foreach (var item in Model.Items)
+                    {
+                        var nombre = item.Producto?.Nombre ?? "Producto";
+                        var subtotalItem = item.Subtotal;
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>@nombre x @item.Cantidad</span>
+                            <strong>S/ @subtotalItem.ToString("F2")</strong>
+                        </div>
+                    }
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <strong>S/ @subtotal.ToString("F2")</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Envío:</span>
+                        <strong>S/ @envio.ToString("F2")</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>IGV (18%):</span>
+                        <strong>S/ @igv.ToString("F2")</strong>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <h6 class="fw-bold">Total a Pagar:</h6>
+                        <h5 class="text-success fw-bold">S/ @total.ToString("F2")</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

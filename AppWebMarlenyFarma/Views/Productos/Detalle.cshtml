@@ -1,0 +1,104 @@
+﻿@model AppWebMarlenyFarma.Models.Producto
+
+@{
+    ViewData["Title"] = $"{Model.Nombre} - MarlenyFarma";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="https://via.placeholder.com/400?text=@Model.Nombre" class="img-fluid rounded" alt="@Model.Nombre">
+            @if (Model.PrecioOriginal > Model.Precio)
+            {
+                <div class="badge bg-danger mt-3">-@((int)((1 - Model.Precio / Model.PrecioOriginal) * 100))% Descuento</div>
+            }
+        </div>
+
+        <div class="col-md-7">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Productos")">Productos</a></li>
+                    <li class="breadcrumb-item active">@Model.Nombre</li>
+                </ol>
+            </nav>
+
+            <h1 class="fw-bold mb-2">@Model.Nombre</h1>
+
+            <div class="mb-3">
+                <span class="text-muted">Categoría: <a href="@Url.Action("Index", "Productos", new { categoriaId = Model.CategoriaId })">@Model.Categoria?.Nombre</a></span>
+            </div>
+
+            <div class="mb-4">
+                <div class="display-4 text-success fw-bold">S/ @Model.Precio.ToString("F2")</div>
+                @if (Model.PrecioOriginal > Model.Precio)
+                {
+                    <small class="text-muted text-decoration-line-through">S/ @Model.PrecioOriginal.ToString("F2")</small>
+                }
+            </div>
+
+            <p class="lead text-muted mb-4">@Model.Descripcion</p>
+
+            <div class="alert alert-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Stock disponible:</strong> @Model.Stock unidades
+                    </div>
+                    <div class="col-md-6">
+                        @if (Model.RequiereReceta)
+                        {
+                            <strong class="text-warning"><i class="fas fa-exclamation-triangle"></i> Requiere Receta Médica</strong>
+                        }
+                        else
+                        {
+                            <strong class="text-success"><i class="fas fa-check-circle"></i> Venta Libre</strong>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Stock > 0)
+            {
+                <form method="post" action="@Url.Action("AgregarProducto", "Carrito")" class="mb-4">
+                    <input type="hidden" name="productoId" value="@Model.ProductoId">
+                    <div class="row align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control" value="1" min="1" max="@Model.Stock" required>
+                        </div>
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-success btn-lg w-100">
+                                <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <i class="fas fa-times-circle"></i> Este producto no está disponible en este momento
+                </div>
+            }
+
+            <div class="mt-5 pt-4 border-top">
+                <h5 class="fw-bold mb-3">Información Adicional</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="fas fa-truck text-success"></i> Entrega en 24 horas en Lima</li>
+                    <li class="mb-2"><i class="fas fa-shield-alt text-success"></i> Compra 100% segura</li>
+                    <li class="mb-2"><i class="fas fa-undo text-success"></i> Devoluciones permitidas</li>
+                    <li class="mb-2"><i class="fas fa-headset text-success"></i> Soporte disponible</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h5 class="fw-bold mb-3">Productos Relacionados</h5>
+            <a href="@Url.Action("Index", "Productos", new { categoriaId = Model.CategoriaId })" class="btn btn-outline-success">
+                Ver más de esta categoría
+            </a>
+        </div>
+    </div>
+</div>

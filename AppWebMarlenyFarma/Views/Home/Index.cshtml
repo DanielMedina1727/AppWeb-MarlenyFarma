@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Inicio - MarlenyFarma";
+    var productosDestacados = ViewBag.ProductosDestacados as List<AppWebMarlenyFarma.Models.Producto>;
+    var categorias = ViewBag.Categorias as List<AppWebMarlenyFarma.Models.Categoria>;
+}
+
+<section class="hero-banner bg-gradient-success text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-3 fw-bold">BOTICA MARLENY FARMA</h1>
+                <p class="lead">CALIDAD, EXPERIENCIA Y GARANTÍA</p>
+                <a href="@Url.Action("Index", "Productos")" class="btn btn-light btn-lg mt-3">Explorar Productos</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="~/images/logo-marleny.png" alt="Logo" class="img-fluid" style="max-height: 200px;" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-truck text-success" style="font-size: 2rem;"></i>
+                </div>
+                <h5>Entrega Rápida</h5>
+                <p class="small text-muted">Recibe tus productos en 24 horas</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-shield-alt text-success" style="font-size: 2rem;"></i>
+                </div>
+                <h5>Compra Segura</h5>
+                <p class="small text-muted">Pago seguro y protegido</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-headset text-success" style="font-size: 2rem;"></i>
+                </div>
+                <h5>Soporte 24/7</h5>
+                <p class="small text-muted">Estamos disponibles para ti</p>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-check-circle text-success" style="font-size: 2rem;"></i>
+                </div>
+                <h5>Garantía</h5>
+                <p class="small text-muted">Productos de calidad garantizada</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="categories py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Categorías</h2>
+        <div class="row g-3">
+            @foreach (var categoria in categorias ?? new List<AppWebMarlenyFarma.Models.Categoria>())
+            {
+                <div class="col-md-4 col-lg-2">
+                    <a href="@Url.Action("Index", "Productos", new { categoriaId = categoria.CategoriaId })" class="card text-decoration-none text-dark h-100 shadow-sm hover-effect">
+                        <div class="card-body text-center">
+                            <i class="fas fa-pills text-success" style="font-size: 2rem;"></i>
+                            <h6 class="mt-3">@categoria.Nombre</h6>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="featured-products py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Productos Destacados</h2>
+        <div class="row g-4">
+            @foreach (var producto in productosDestacados ?? new List<AppWebMarlenyFarma.Models.Producto>())
+            {
+                <div class="col-md-4 col-lg-2">
+                    <div class="card h-100 shadow-sm product-card">
+                        <img src="https://via.placeholder.com/150?text=@producto.Nombre.Substring(0, Math.Min(10, producto.Nombre.Length))" class="card-img-top" alt="@producto.Nombre">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">@producto.Nombre</h6>
+                            <p class="card-text small text-muted flex-grow-1">@producto.Descripcion</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h6 mb-0 text-success">S/ @producto.Precio.ToString("F2")</span>
+                                    @if (producto.PrecioOriginal > producto.Precio)
+                                    {
+                                        <small class="text-muted text-decoration-line-through">S/ @producto.PrecioOriginal.ToString("F2")</small>
+                                    }
+                                </div>
+                                <span class="badge bg-success">-@((int)((1 - producto.Precio / producto.PrecioOriginal) * 100))%</span>
+                            </div>
+                            <a href="@Url.Action("Detalle", "Productos", new { id = producto.ProductoId })" class="btn btn-sm btn-success mt-2 w-100">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5 bg-success text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3">¿Necesitas Ayuda?</h2>
+        <p class="lead mb-4">Contáctanos y nuestro equipo te atenderá con gusto</p>
+        <a href="/" class="btn btn-light btn-lg">
+            <i class="fas fa-envelope"></i> Contactar
+        </a>
+    </div>
+</section>

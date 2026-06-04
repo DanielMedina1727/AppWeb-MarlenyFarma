@@ -1,0 +1,67 @@
+﻿@model AppWebMarlenyFarma.Controllers.LoginViewModel
+
+@{
+    ViewData["Title"] = "Ingresar - MarlenyFarma";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-sign-in-alt"></i> Ingresar a tu Cuenta</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+
+                        @if (!string.IsNullOrEmpty(ViewData["ReturnUrl"]?.ToString()))
+                        {
+                            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+                        }
+
+                        <div class="mb-3">
+                            <label class="form-label">Correo Electrónico*</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña*</label>
+                            <input type="password" name="contrasena" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" name="recuerdaMe" class="form-check-input" id="recuerdaMe">
+                            <label class="form-check-label" for="recuerdaMe">
+                                Recuérdame
+                            </label>
+                        </div>
+
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger">
+                                @Html.ValidationSummary(false)
+                            </div>
+                        }
+
+                        <button type="submit" class="btn btn-success w-100 btn-lg mb-3">
+                            Ingresar
+                        </button>
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center text-muted">
+                        ¿No tienes cuenta?
+                        <a href="@Url.Action("Registro", "Cuenta")">Regístrate aquí</a>
+                    </p>
+
+                    <div class="mt-3">
+                        <a href="/" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
