@@ -1,0 +1,186 @@
+@model IEnumerable<AppWebMarlenyFarma.Models.Producto>
+
+@{
+    ViewData["Title"] = "Catálogo de Productos y Control de Inventario";
+    Layout = "_AdminLayout";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+        <i class="fas fa-check-circle me-1"></i> @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+        <i class="fas fa-exclamation-circle me-1"></i> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card dashboard-card p-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <!-- Búsqueda -->
+        <form method="get" class="d-flex flex-grow-1 max-w-500">
+            <div class="input-group">
+                <input type="text" name="busqueda" value="@ViewBag.Busqueda" class="form-control" placeholder="Buscar por nombre o descripción..." />
+                <button class="btn btn-success" type="submit">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+                @if (!string.IsNullOrEmpty(ViewBag.Busqueda))
+                {
+                    <a href="@Url.Action("Productos", "Admin")" class="btn btn-outline-secondary">Limpiar</a>
+                }
+            </div>
+        </form>
+        
+        <!-- Crear nuevo producto -->
+        <a href="@Url.Action("CrearProducto", "Admin")" class="btn btn-success btn-lg">
+            <i class="fas fa-plus"></i> Nuevo Producto
+        </a>
+    </div>
+
+    <!-- Tabla de Productos -->
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Proveedor</th>
+                    <th>Precio Venta</th>
+                    <th class="text-center">Stock</th>
+                    <th>Requerimientos</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var prod in Model)
+                    {
+                        var esBajoStock = prod.Stock < 10;
+                        <tr>
+                            <td>
+                                <img src="@(string.IsNullOrEmpty(prod.ImagenUrl) ? "https://via.placeholder.com/60?text=P" : prod.ImagenUrl)" 
+                                     alt="@prod.Nombre" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;" />
+                            </td>
+                            <td>
+                                <div class="fw-bold">@prod.Nombre</div>
+                                <small class="text-muted text-truncate d-inline-block" style="max-width: 250px;">@prod.Descripcion</small>
+                            </td>
+                            <td>
+                                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-2 py-1">
+                                    @(prod.Categoria?.Nombre ?? "Sin categoría")
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-secondary small">
+                                    @(prod.Proveedor?.Nombre ?? "Sin proveedor")
+                                </span>
+                            </td>
+                            <td class="fw-bold">S/ @prod.Precio.ToString("F2")</td>
+                            <td class="text-center">
+                                @if (esBajoStock)
+                                {
+                                    <div class="text-danger fw-bold">
+                                        <i class="fas fa-exclamation-triangle me-1"></i> @prod.Stock
+                                    </div>
+                                    <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-10 small-badge" style="font-size: 0.7rem;">
+                                        Reabastecer
+                                    </span>
+                                }
+                                else
+                                {
+                                    <div class="text-success fw-bold">@prod.Stock</div>
+                                }
+                            </td>
+                            <td>
+                                @if (prod.RequiereReceta)
+                                {
+                                    <span class="badge bg-danger px-2 py-1 text-white" style="font-size: 0.75rem;"><i class="fas fa-file-medical"></i> Receta Médica</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-light text-muted px-2 py-1" style="font-size: 0.75rem;">Venta Libre</span>
+                                }
+
+                                @if (prod.EsDestacado)
+                                {
+                                    <span class="badge bg-warning text-dark px-2 py-1" style="font-size: 0.75rem;"><i class="fas fa-star"></i> Destacado</span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <!-- Botón rápido para agregar stock -->
+                                    <button class="btn btn-sm btn-outline-success" data-bs-toggle="collapse" data-bs-target="#stockForm-@prod.ProductoId" title="Agregar Stock">
+                                        <i class="fas fa-plus-circle"></i> Stock
+                                    </button>
+                                    
+                                    <!-- Editar -->
+                                    <a href="@Url.Action("EditarProducto", "Admin", new { id = prod.ProductoId })" class="btn btn-sm btn-outline-primary" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    
+                                    <!-- Eliminar -->
+                                    <form action="@Url.Action("EliminarProducto", "Admin", new { id = prod.ProductoId })" method="post" onsubmit="return confirm('¿Está seguro de que desea eliminar este producto?')" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <!-- Formulario Desplegable Rápido para Añadir Stock -->
+                                <div class="collapse mt-2" id="stockForm-@prod.ProductoId">
+                                    <form action="@Url.Action("ActualizarStock", "Admin")" method="post" class="p-2 border rounded bg-light">
+                                        <input type="hidden" name="productoId" value="@prod.ProductoId" />
+                                        <div class="input-group input-group-sm">
+                                            <input type="number" name="stockAdicional" class="form-control" placeholder="Cant." min="1" required style="max-width: 80px;" />
+                                            <button class="btn btn-success" type="submit">Agregar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">No se encontraron productos en el inventario.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación -->
+    @if (ViewBag.TotalPages > 1)
+    {
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(ViewBag.Page == i ? "active" : "")">
+                        <a class="page-link @(ViewBag.Page == i ? "bg-success border-success text-white" : "text-success")" 
+                           href="@Url.Action("Productos", "Admin", new { busqueda = ViewBag.Busqueda, page = i })">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+<style>
+    .max-w-500 {
+        max-width: 500px;
+    }
+    .small-badge {
+        font-size: 0.7rem;
+        padding: 0.2em 0.5em;
+    }
+</style>

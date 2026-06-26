@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +30,7 @@ namespace AppWebMarlenyFarma.Controllers
 
                 if (resultado.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(usuario, "Cliente");
                     await _signInManager.SignInAsync(usuario, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -59,6 +60,11 @@ namespace AppWebMarlenyFarma.Controllers
                 var resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Contrasena, model.RecuerdaMe, lockoutOnFailure: false);
                 if (resultado.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    if (user != null && await _userManager.IsInRoleAsync(user, "Administrador"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
 
                     var productoPendienteId = HttpContext.Session.GetInt32("ProductoPendienteId");
                     var cantidadPendiente = HttpContext.Session.GetInt32("ProductoPendienteCantidad");

@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Inicio - MarlenyFarma";
     var productosDestacados = ViewBag.ProductosDestacados as List<AppWebMarlenyFarma.Models.Producto>;
     var categorias = ViewBag.Categorias as List<AppWebMarlenyFarma.Models.Categoria>;
@@ -22,33 +22,41 @@
 <section class="features py-5 bg-light">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 text-center mb-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-truck text-success" style="font-size: 2rem;"></i>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 p-4 text-center border-0 shadow-sm">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-truck text-success" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Entrega Rápida</h5>
+                    <p class="small text-muted mb-0">Recibe tus productos en 24 horas</p>
                 </div>
-                <h5>Entrega Rápida</h5>
-                <p class="small text-muted">Recibe tus productos en 24 horas</p>
             </div>
-            <div class="col-md-3 text-center mb-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-shield-alt text-success" style="font-size: 2rem;"></i>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 p-4 text-center border-0 shadow-sm">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-shield-alt text-success" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Compra Segura</h5>
+                    <p class="small text-muted mb-0">Pago seguro y protegido</p>
                 </div>
-                <h5>Compra Segura</h5>
-                <p class="small text-muted">Pago seguro y protegido</p>
             </div>
-            <div class="col-md-3 text-center mb-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-headset text-success" style="font-size: 2rem;"></i>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 p-4 text-center border-0 shadow-sm">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-headset text-success" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Soporte 24/7</h5>
+                    <p class="small text-muted mb-0">Estamos disponibles para ti</p>
                 </div>
-                <h5>Soporte 24/7</h5>
-                <p class="small text-muted">Estamos disponibles para ti</p>
             </div>
-            <div class="col-md-3 text-center mb-4">
-                <div class="feature-icon mb-3">
-                    <i class="fas fa-check-circle text-success" style="font-size: 2rem;"></i>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 p-4 text-center border-0 shadow-sm">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-check-circle text-success" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5 class="fw-bold">Garantía</h5>
+                    <p class="small text-muted mb-0">Productos de calidad garantizada</p>
                 </div>
-                <h5>Garantía</h5>
-                <p class="small text-muted">Productos de calidad garantizada</p>
             </div>
         </div>
     </div>

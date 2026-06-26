@@ -1,0 +1,76 @@
+@model IEnumerable<AppWebMarlenyFarma.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Gestión de Categorías de Productos";
+    Layout = "_AdminLayout";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+        <i class="fas fa-check-circle me-1"></i> @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+        <i class="fas fa-exclamation-circle me-1"></i> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card dashboard-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0 text-secondary">Categorías Registradas</h5>
+        <a href="@Url.Action("CrearCategoria", "Admin")" class="btn btn-success">
+            <i class="fas fa-plus"></i> Nueva Categoría
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 80px;">ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var cat in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold text-muted">#@cat.CategoriaId</td>
+                            <td class="fw-bold text-success">@cat.Nombre</td>
+                            <td>@cat.Descripcion</td>
+                            <td class="text-center">
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <a href="@Url.Action("EditarCategoria", "Admin", new { id = cat.CategoriaId })" class="btn btn-sm btn-outline-primary" title="Editar">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    
+                                    <form action="@Url.Action("EliminarCategoria", "Admin", new { id = cat.CategoriaId })" method="post" onsubmit="return confirm('¿Está seguro de que desea eliminar esta categoría?')" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">No se han registrado categorías.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

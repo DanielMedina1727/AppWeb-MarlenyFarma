@@ -1,0 +1,75 @@
+@model AppWebMarlenyFarma.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Editar Proveedor";
+    Layout = "_AdminLayout";
+}
+
+<div class="card dashboard-card p-4 max-w-700 mx-auto">
+    <h5 class="fw-bold mb-4 border-bottom pb-2">
+        <i class="fas fa-edit text-success me-2"></i> Modificar Datos del Proveedor
+    </h5>
+
+    <form asp-action="EditarProveedor" method="post">
+        <!-- Id Oculto -->
+        <input type="hidden" asp-for="ProveedorId" />
+
+        <div class="row g-3">
+            <!-- Razón Social -->
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Razón Social / Nombre del Proveedor*</label>
+                <input asp-for="Nombre" class="form-control" required />
+                <span asp-validation-for="Nombre" class="text-danger small"></span>
+            </div>
+
+            <!-- RUC y Persona de Contacto -->
+            <div class="col-md-6">
+                <label class="form-label fw-bold">RUC*</label>
+                <input asp-for="Ruc" class="form-control" required maxlength="11" minlength="11" />
+                <span asp-validation-for="Ruc" class="text-danger small"></span>
+            </div>
+            
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Persona de Contacto</label>
+                <input asp-for="Contacto" class="form-control" />
+                <span asp-validation-for="Contacto" class="text-danger small"></span>
+            </div>
+
+            <!-- Teléfono y Correo Electrónico -->
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Teléfono*</label>
+                <input asp-for="Telefono" class="form-control" required />
+                <span asp-validation-for="Telefono" class="text-danger small"></span>
+            </div>
+            
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Correo Electrónico*</label>
+                <input asp-for="Email" type="email" class="form-control" required />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <!-- Dirección -->
+            <div class="col-md-12">
+                <label class="form-label fw-bold">Dirección Fiscal / Distribuidora</label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger small"></span>
+            </div>
+
+            <!-- Botones -->
+            <div class="col-md-12 d-flex gap-3 justify-content-end mt-4">
+                <a href="@Url.Action("Proveedores", "Admin")" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .max-w-700 {
+        max-width: 700px;
+    }
+</style>

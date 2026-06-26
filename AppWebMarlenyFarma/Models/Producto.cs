@@ -1,4 +1,4 @@
-﻿namespace AppWebMarlenyFarma.Models
+namespace AppWebMarlenyFarma.Models
 {
     public class Producto
     {
@@ -12,9 +12,11 @@
         public bool EsDestacado { get; set; }
         public bool RequiereReceta { get; set; }
         public int CategoriaId { get; set; }
+        public int? ProveedorId { get; set; }
         public DateTime FechaCreacion { get; set; } 
 
         public Categoria? Categoria { get; set; }
+        public Proveedor? Proveedor { get; set; }
         public ICollection<ItemCarrito> ItemsCarrito { get; set; } = new List<ItemCarrito>();
         public ICollection<ItemPedido> ItemsPedido { get; set; } = new List<ItemPedido>();
     }

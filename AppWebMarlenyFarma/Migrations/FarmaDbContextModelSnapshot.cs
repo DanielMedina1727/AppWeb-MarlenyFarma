@@ -247,6 +247,9 @@ namespace AppWebMarlenyFarma.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("ProveedorId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("RequiereReceta")
                         .HasColumnType("bit");
 
@@ -256,6 +259,8 @@ namespace AppWebMarlenyFarma.Migrations
                     b.HasKey("ProductoId");
 
                     b.HasIndex("CategoriaId");
+
+                    b.HasIndex("ProveedorId");
 
                     b.ToTable("Productos");
 
@@ -270,6 +275,7 @@ namespace AppWebMarlenyFarma.Migrations
                             Nombre = "Paracetamol 500mg",
                             Precio = 8.50m,
                             PrecioOriginal = 10.00m,
+                            ProveedorId = 1,
                             RequiereReceta = false,
                             Stock = 100
                         },
@@ -283,6 +289,7 @@ namespace AppWebMarlenyFarma.Migrations
                             Nombre = "Ibuprofeno 400mg",
                             Precio = 12.00m,
                             PrecioOriginal = 15.00m,
+                            ProveedorId = 1,
                             RequiereReceta = false,
                             Stock = 85
                         },
@@ -296,6 +303,7 @@ namespace AppWebMarlenyFarma.Migrations
                             Nombre = "Amoxicilina 500mg",
                             Precio = 22.00m,
                             PrecioOriginal = 25.00m,
+                            ProveedorId = 2,
                             RequiereReceta = true,
                             Stock = 50
                         },
@@ -309,6 +317,7 @@ namespace AppWebMarlenyFarma.Migrations
                             Nombre = "Vitamina C 1000mg",
                             Precio = 18.00m,
                             PrecioOriginal = 20.00m,
+                            ProveedorId = 2,
                             RequiereReceta = false,
                             Stock = 120
                         },
@@ -322,6 +331,7 @@ namespace AppWebMarlenyFarma.Migrations
                             Nombre = "Jabón Neutro",
                             Precio = 5.00m,
                             PrecioOriginal = 6.00m,
+                            ProveedorId = 3,
                             RequiereReceta = false,
                             Stock = 200
                         },
@@ -335,8 +345,78 @@ namespace AppWebMarlenyFarma.Migrations
                             Nombre = "Crema Facial Hidratante",
                             Precio = 35.00m,
                             PrecioOriginal = 45.00m,
+                            ProveedorId = 3,
                             RequiereReceta = false,
                             Stock = 60
+                        });
+                });
+
+            modelBuilder.Entity("AppWebMarlenyFarma.Models.Proveedor", b =>
+                {
+                    b.Property<int>("ProveedorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProveedorId"));
+
+                    b.Property<string>("Contacto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ruc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProveedorId");
+
+                    b.ToTable("Proveedores");
+
+                    b.HasData(
+                        new
+                        {
+                            ProveedorId = 1,
+                            Contacto = "Juan Pérez",
+                            Direccion = "Av. Los Libertadores 123, Lima",
+                            Email = "ventas@farmasalud.com",
+                            Nombre = "Distribuidora FarmaSalud",
+                            Ruc = "20123456789",
+                            Telefono = "987654321"
+                        },
+                        new
+                        {
+                            ProveedorId = 2,
+                            Contacto = "Ana Gómez",
+                            Direccion = "Jr. Carabaya 456, Lima",
+                            Email = "contacto@meditech.com",
+                            Nombre = "Laboratorios MediTech",
+                            Ruc = "20987654321",
+                            Telefono = "912345678"
+                        },
+                        new
+                        {
+                            ProveedorId = 3,
+                            Contacto = "Carlos Ruiz",
+                            Direccion = "Av. El Derby 789, Santiago de Surco",
+                            Email = "ventas@higieneybienestar.com",
+                            Nombre = "Higiene & Bienestar S.A.C.",
+                            Ruc = "20555666777",
+                            Telefono = "945612378"
                         });
                 });
 
@@ -584,7 +664,14 @@ namespace AppWebMarlenyFarma.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("AppWebMarlenyFarma.Models.Proveedor", "Proveedor")
+                        .WithMany("Productos")
+                        .HasForeignKey("ProveedorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Categoria");
+
+                    b.Navigation("Proveedor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -658,6 +745,11 @@ namespace AppWebMarlenyFarma.Migrations
                     b.Navigation("ItemsCarrito");
 
                     b.Navigation("ItemsPedido");
+                });
+
+            modelBuilder.Entity("AppWebMarlenyFarma.Models.Proveedor", b =>
+                {
+                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }

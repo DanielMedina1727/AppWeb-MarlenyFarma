@@ -78,9 +78,9 @@
               "Title": "FarmaDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Data\\FarmaDbContext.cs*",
-              "RelativeToolTip": "AppWebMarlenyFarma\\Data\\FarmaDbContext.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
+              "RelativeToolTip": "AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-04T22:30:03.823Z",
               "EditorCaption": ""
@@ -143,8 +143,7 @@
               "RelativeToolTip": "AppWebMarlenyFarma\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAFwAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-04T18:18:42.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-04T18:18:42.792Z"
             },
             {
               "$type": "Document",

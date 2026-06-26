@@ -1,0 +1,148 @@
+@model AppWebMarlenyFarma.Models.Pedido
+
+@{
+    ViewData["Title"] = $"Detalle de Pedido #{Model.PedidoId}";
+    Layout = "_AdminLayout";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+        <i class="fas fa-check-circle me-1"></i> @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row g-4">
+    <!-- Información General del Pedido -->
+    <div class="col-md-5">
+        <div class="card dashboard-card p-4">
+            <h5 class="fw-bold mb-3 border-bottom pb-2 text-secondary">
+                <i class="fas fa-file-invoice text-success me-2"></i> Información General
+            </h5>
+            
+            <table class="table table-borderless align-middle">
+                <tr>
+                    <td class="fw-bold text-muted" style="width: 140px;">ID Pedido:</td>
+                    <td class="fw-bold">#@Model.PedidoId</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Fecha y Hora:</td>
+                    <td>@Model.FechaPedido.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Total:</td>
+                    <td class="h5 mb-0 fw-bold text-success">S/ @Model.Total.ToString("F2")</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Estado Actual:</td>
+                    <td>
+                        @{
+                            var badgeClass = Model.Estado switch
+                            {
+                                AppWebMarlenyFarma.Models.EstadoPedido.Pendiente => "bg-warning text-dark",
+                                AppWebMarlenyFarma.Models.EstadoPedido.Confirmado => "bg-info text-white",
+                                AppWebMarlenyFarma.Models.EstadoPedido.EnPreparacion => "bg-primary text-white",
+                                AppWebMarlenyFarma.Models.EstadoPedido.Enviado => "bg-secondary text-white",
+                                AppWebMarlenyFarma.Models.EstadoPedido.Entregado => "bg-success text-white",
+                                AppWebMarlenyFarma.Models.EstadoPedido.Cancelado => "bg-danger text-white",
+                                _ => "bg-dark text-white"
+                            };
+                        }
+                        <span class="badge @badgeClass px-3 py-1 fs-6">@Model.Estado</span>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Formulario de Cambio de Estado -->
+            <form action="@Url.Action("ActualizarEstadoPedido", "Admin")" method="post" class="mt-4 p-3 border rounded bg-light">
+                <input type="hidden" name="pedidoId" value="@Model.PedidoId" />
+                <label class="form-label fw-bold text-secondary">Actualizar Estado de Entrega</label>
+                <div class="input-group">
+                    <select name="estado" class="form-select" asp-for="Estado" asp-items="Html.GetEnumSelectList<AppWebMarlenyFarma.Models.EstadoPedido>()">
+                    </select>
+                    <button class="btn btn-success" type="submit">
+                        <i class="fas fa-sync-alt"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card dashboard-card p-4 mt-4">
+            <h5 class="fw-bold mb-3 border-bottom pb-2 text-secondary">
+                <i class="fas fa-user-circle text-success me-2"></i> Datos de Despacho
+            </h5>
+            <table class="table table-borderless">
+                <tr>
+                    <td class="fw-bold text-muted" style="width: 140px;">Cliente:</td>
+                    <td>@Model.NombreCliente</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Correo:</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Teléfono:</td>
+                    <td>@Model.Telefono</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Dirección:</td>
+                    <td>@Model.Direccion</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold text-muted">Notas:</td>
+                    <td class="text-secondary font-italic">@(string.IsNullOrEmpty(Model.Notas) ? "Sin notas adicionales" : Model.Notas)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Lista de Ítems del Pedido -->
+    <div class="col-md-7">
+        <div class="card dashboard-card p-4 h-100">
+            <h5 class="fw-bold mb-3 border-bottom pb-2 text-secondary">
+                <i class="fas fa-list text-success me-2"></i> Productos Adquiridos
+            </h5>
+            
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Producto</th>
+                            <th class="text-center">Precio Unitario</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-end">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            var subtotal = item.PrecioUnitario * item.Cantidad;
+                            <tr>
+                                <td>
+                                    <div class="fw-bold text-dark">@(item.Producto?.Nombre ?? $"Producto #{item.ProductoId}")</div>
+                                    <small class="text-muted">ID: @item.ProductoId</small>
+                                </td>
+                                <td class="text-center">S/ @item.PrecioUnitario.ToString("F2")</td>
+                                <td class="text-center fw-bold text-dark">@item.Cantidad</td>
+                                <td class="text-end fw-bold text-success">S/ @subtotal.ToString("F2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <td colspan="3" class="text-end fw-bold">Total a Cobrar:</td>
+                            <td class="text-end fw-bold text-success h5 mb-0">S/ @Model.Total.ToString("F2")</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="mt-4 text-end">
+                <a href="@Url.Action("HistorialPedidos", "Admin")" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver al Historial
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

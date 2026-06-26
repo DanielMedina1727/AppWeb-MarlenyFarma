@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using AppWebMarlenyFarma.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -16,6 +16,7 @@ namespace AppWebMarlenyFarma.Data
         public DbSet<ItemCarrito> ItemsCarrito { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItemsPedido { get; set; }
+        public DbSet<Proveedor> Proveedores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,7 +71,19 @@ namespace AppWebMarlenyFarma.Data
                 .HasForeignKey(p => p.CategoriaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Producto>()
+                .HasOne(p => p.Proveedor)
+                .WithMany(pr => pr.Productos)
+                .HasForeignKey(p => p.ProveedorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Seed data (igual que lo tenías)
+            modelBuilder.Entity<Proveedor>().HasData(
+                new Proveedor { ProveedorId = 1, Nombre = "Distribuidora FarmaSalud", Contacto = "Juan Pérez", Telefono = "987654321", Email = "ventas@farmasalud.com", Direccion = "Av. Los Libertadores 123, Lima", Ruc = "20123456789" },
+                new Proveedor { ProveedorId = 2, Nombre = "Laboratorios MediTech", Contacto = "Ana Gómez", Telefono = "912345678", Email = "contacto@meditech.com", Direccion = "Jr. Carabaya 456, Lima", Ruc = "20987654321" },
+                new Proveedor { ProveedorId = 3, Nombre = "Higiene & Bienestar S.A.C.", Contacto = "Carlos Ruiz", Telefono = "945612378", Email = "ventas@higieneybienestar.com", Direccion = "Av. El Derby 789, Santiago de Surco", Ruc = "20555666777" }
+            );
+
             modelBuilder.Entity<Categoria>().HasData(
                 new Categoria { CategoriaId = 1, Nombre = "Analgésicos", Descripcion = "Medicamentos para el dolor" },
                 new Categoria { CategoriaId = 2, Nombre = "Antibióticos", Descripcion = "Medicamentos antibacterianos" },
@@ -80,12 +93,12 @@ namespace AppWebMarlenyFarma.Data
             );
 
             modelBuilder.Entity<Producto>().HasData(
-                new Producto { ProductoId = 1, Nombre = "Paracetamol 500mg", Descripcion = "Tabletas de paracetamol", Precio = 8.50m, PrecioOriginal = 10.00m, Stock = 100, CategoriaId = 1, EsDestacado = true, RequiereReceta = false },
-                new Producto { ProductoId = 2, Nombre = "Ibuprofeno 400mg", Descripcion = "Comprimidos de ibuprofeno", Precio = 12.00m, PrecioOriginal = 15.00m, Stock = 85, CategoriaId = 1, EsDestacado = true, RequiereReceta = false },
-                new Producto { ProductoId = 3, Nombre = "Amoxicilina 500mg", Descripcion = "Cápsulas de amoxicilina", Precio = 22.00m, PrecioOriginal = 25.00m, Stock = 50, CategoriaId = 2, EsDestacado = false, RequiereReceta = true },
-                new Producto { ProductoId = 4, Nombre = "Vitamina C 1000mg", Descripcion = "Tabletas effervescentes", Precio = 18.00m, PrecioOriginal = 20.00m, Stock = 120, CategoriaId = 3, EsDestacado = true, RequiereReceta = false },
-                new Producto { ProductoId = 5, Nombre = "Jabón Neutro", Descripcion = "Barra de jabón neutro 100g", Precio = 5.00m, PrecioOriginal = 6.00m, Stock = 200, CategoriaId = 4, EsDestacado = false, RequiereReceta = false },
-                new Producto { ProductoId = 6, Nombre = "Crema Facial Hidratante", Descripcion = "Crema nutritiva para el rostro", Precio = 35.00m, PrecioOriginal = 45.00m, Stock = 60, CategoriaId = 5, EsDestacado = true, RequiereReceta = false }
+                new Producto { ProductoId = 1, Nombre = "Paracetamol 500mg", Descripcion = "Tabletas de paracetamol", Precio = 8.50m, PrecioOriginal = 10.00m, Stock = 100, CategoriaId = 1, ProveedorId = 1, EsDestacado = true, RequiereReceta = false },
+                new Producto { ProductoId = 2, Nombre = "Ibuprofeno 400mg", Descripcion = "Comprimidos de ibuprofeno", Precio = 12.00m, PrecioOriginal = 15.00m, Stock = 85, CategoriaId = 1, ProveedorId = 1, EsDestacado = true, RequiereReceta = false },
+                new Producto { ProductoId = 3, Nombre = "Amoxicilina 500mg", Descripcion = "Cápsulas de amoxicilina", Precio = 22.00m, PrecioOriginal = 25.00m, Stock = 50, CategoriaId = 2, ProveedorId = 2, EsDestacado = false, RequiereReceta = true },
+                new Producto { ProductoId = 4, Nombre = "Vitamina C 1000mg", Descripcion = "Tabletas effervescentes", Precio = 18.00m, PrecioOriginal = 20.00m, Stock = 120, CategoriaId = 3, ProveedorId = 2, EsDestacado = true, RequiereReceta = false },
+                new Producto { ProductoId = 5, Nombre = "Jabón Neutro", Descripcion = "Barra de jabón neutro 100g", Precio = 5.00m, PrecioOriginal = 6.00m, Stock = 200, CategoriaId = 4, ProveedorId = 3, EsDestacado = false, RequiereReceta = false },
+                new Producto { ProductoId = 6, Nombre = "Crema Facial Hidratante", Descripcion = "Crema nutritiva para el rostro", Precio = 35.00m, PrecioOriginal = 45.00m, Stock = 60, CategoriaId = 5, ProveedorId = 3, EsDestacado = true, RequiereReceta = false }
             );
         }
     }

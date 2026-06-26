@@ -1,0 +1,56 @@
+@model IEnumerable<AppWebMarlenyFarma.Controllers.ClienteViewModel>
+
+@{
+    ViewData["Title"] = "Gestión y Reporte de Clientes";
+    Layout = "_AdminLayout";
+}
+
+<div class="card dashboard-card p-4">
+    <div class="mb-4">
+        <h5 class="fw-bold text-secondary">Clientes Registrados en la Plataforma</h5>
+        <p class="text-muted small">Muestra la actividad comercial acumulada por cada cuenta de cliente registrado.</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Usuario / Correo Electrónico</th>
+                    <th>ID de Cuenta</th>
+                    <th class="text-center">Total Pedidos</th>
+                    <th class="text-end">Monto Total Invertido (S/)</th>
+                    <th class="text-center">Estado de Cuenta</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var cliente in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">
+                                <i class="fas fa-user-circle text-success me-2 fa-lg"></i> @cliente.Email
+                            </td>
+                            <td class="text-muted font-monospace small">@cliente.UsuarioId</td>
+                            <td class="text-center fw-bold text-dark">@cliente.TotalPedidos</td>
+                            <td class="text-end fw-bold text-success">
+                                S/ @cliente.TotalGastado.ToString("F2")
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-10 px-2 py-1">
+                                    Activo
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-4">No hay clientes registrados en el sistema.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
