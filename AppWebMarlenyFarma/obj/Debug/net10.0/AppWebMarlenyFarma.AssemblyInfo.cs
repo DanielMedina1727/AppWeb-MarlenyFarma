@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppWebMarlenyFarma")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36af5ca470e178b29d7c27796bc34629449fdefe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eae376fdecc30f18c66d3189becb217d8e92b0df")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppWebMarlenyFarma")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppWebMarlenyFarma")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

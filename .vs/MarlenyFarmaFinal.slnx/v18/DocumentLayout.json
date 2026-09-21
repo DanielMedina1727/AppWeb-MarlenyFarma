@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\data\\farmadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\data\\farmadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\controllers\\cuentacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\controllers\\cuentacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\data\\farmadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\data\\farmadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\views\\home\\contacto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -39,14 +55,6 @@
       "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\controllers\\cuentacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\controllers\\cuentacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|c:\\users\\administrator\\documents\\appweb-marlenyfarma\\appwebmarlenyfarma\\controllers\\carritocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{199F42EA-205A-1009-B9F3-6CFFAB9544E8}|AppWebMarlenyFarma\\AppWebMarlenyFarma.csproj|solutionrelative:appwebmarlenyfarma\\controllers\\carritocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -70,11 +78,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\appsettings.json",
+              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\appsettings.json",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\appsettings.json",
+              "RelativeToolTip": "AppWebMarlenyFarma\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-03T02:17:27.983Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "AppWebMarlenyFarma\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-02T21:48:14.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "FarmaDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
@@ -82,48 +114,24 @@
               "RelativeToolTip": "AppWebMarlenyFarma\\Data\\FarmaDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-04T22:30:03.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-04T22:30:03.823Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "AppWebMarlenyFarma\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAMoBAAAAAAAAAAAkwN8BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-06-04T18:27:09.728Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Checkout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
-              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
-              "RelativeToolTip": "AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAF4AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-04T20:54:31.749Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 0,
               "Title": "CuentaController.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Controllers\\CuentaController.cs",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Controllers\\CuentaController.cs",
               "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Controllers\\CuentaController.cs",
               "RelativeToolTip": "AppWebMarlenyFarma\\Controllers\\CuentaController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAkwEIAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAAG8AAAAAAAAAAAA2wEIAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-04T18:23:58.483Z"
+              "WhenOpened": "2026-06-04T18:23:58.483Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Contacto.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Home\\Contacto.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Home\\Contacto.cshtml",
@@ -135,19 +143,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "AppWebMarlenyFarma\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAFwAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAFwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-06-04T18:18:42.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Program.cs",
+              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Program.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Program.cs",
+              "RelativeToolTip": "AppWebMarlenyFarma\\Program.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwC8AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-04T18:21:22.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Checkout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
+              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
+              "RelativeToolTip": "AppWebMarlenyFarma\\Views\\Carrito\\Checkout.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAF4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-04T20:54:31.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "AppWebMarlenyFarma\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAMoBAAAAAAAAAAAkwN8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-04T18:27:09.728Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Nosotros.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Home\\Nosotros.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Home\\Nosotros.cshtml",
@@ -159,19 +203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Program.cs",
-              "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Program.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Program.cs",
-              "RelativeToolTip": "AppWebMarlenyFarma\\Program.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAiwBIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-04T18:21:22.527Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "ConfirmacionPedido.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Carrito\\ConfirmacionPedido.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Carrito\\ConfirmacionPedido.cshtml",
@@ -183,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Carrito\\Index.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Carrito\\Index.cshtml",
@@ -195,7 +227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Home\\Index.cshtml",
@@ -207,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CarritoController.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Controllers\\CarritoController.cs",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Controllers\\CarritoController.cs",
@@ -219,7 +251,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "Perfil.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Cuenta\\Perfil.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Cuenta\\Perfil.cshtml",
@@ -231,7 +263,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "20260604190536_mig1.cs",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Migrations\\20260604190536_mig1.cs",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Migrations\\20260604190536_mig1.cs",
@@ -243,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\Administrator\\Documents\\AppWeb-MarlenyFarma\\AppWebMarlenyFarma\\Views\\Cuenta\\Login.cshtml",
               "RelativeDocumentMoniker": "AppWebMarlenyFarma\\Views\\Cuenta\\Login.cshtml",
