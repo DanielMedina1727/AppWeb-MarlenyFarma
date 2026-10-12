@@ -1,0 +1,59 @@
+name: Desplegar a MonsterASP via FTP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Compilar y Desplegar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Descargar código fuente
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+
+      - name: 🔐 Configurar Cadena de Conexión de Producción (Opcional)
+        if: ${{ secrets.DB_CONNECTION_STRING != '' }}
+        shell: bash
+        run: |
+          PROD_FILE="AppWebMarlenyFarma/appsettings.Production.json"
+          if [ -f "$PROD_FILE" ]; then
+            python3 -c "
+import json
+with open('$PROD_FILE', 'r') as f:
+    data = json.load(f)
+data['ConnectionStrings']['ConexionDB'] = '''${{ secrets.DB_CONNECTION_STRING }}'''
+with open('$PROD_FILE', 'w') as f:
+    json.dump(data, f, indent=2)
+"
+          fi
+
+      - name: 📦 Restaurar dependencias
+        run: dotnet restore AppWebMarlenyFarma/AppWebMarlenyFarma.csproj
+
+      - name: 🔨 Compilar y Publicar Proyecto
+        run: >
+          dotnet publish AppWebMarlenyFarma/AppWebMarlenyFarma.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -o ./publish
+
+      - name: 🚀 Subir a MonsterASP via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./publish/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/site/wwwroot/' }}
+          dangerous-clean-slate: false
