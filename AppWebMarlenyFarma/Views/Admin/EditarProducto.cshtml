@@ -81,8 +81,12 @@
             <!-- URL de Imagen -->
             <div class="col-md-12">
                 <label class="form-label fw-bold">Enlace de Imagen</label>
-                <input asp-for="ImagenUrl" class="form-control" placeholder="https://ejemplo.com/imagen.jpg" />
+                <input asp-for="ImagenUrl" class="form-control" id="inputImagenUrl" placeholder="https://ejemplo.com/imagen.jpg o /images/..." />
                 <span asp-validation-for="ImagenUrl" class="text-danger small"></span>
+                <div class="mt-2 d-flex align-items-center gap-3 p-2 bg-light rounded border">
+                    <img id="previewImagen" src="@Model.ObtenerImagenUrl()" alt="Vista previa" class="img-thumbnail" style="width: 70px; height: 70px; object-fit: contain; background: #fff;" onerror="this.onerror=null; this.src='/images/default-product.svg';" />
+                    <small class="text-muted">Vista previa de la imagen actual o del enlace ingresado.</small>
+                </div>
             </div>
 
             <!-- Opciones Booleanas (Destacado, Receta) -->
@@ -120,3 +124,13 @@
         max-width: 800px;
     }
 </style>
+
+<script>
+    document.getElementById('inputImagenUrl')?.addEventListener('input', function () {
+        var val = this.value.trim();
+        var img = document.getElementById('previewImagen');
+        if (img) {
+            img.src = val || '/images/default-product.svg';
+        }
+    });
+</script>

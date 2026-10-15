@@ -19,6 +19,51 @@ namespace AppWebMarlenyFarma.Models
         public Proveedor? Proveedor { get; set; }
         public ICollection<ItemCarrito> ItemsCarrito { get; set; } = new List<ItemCarrito>();
         public ICollection<ItemPedido> ItemsPedido { get; set; } = new List<ItemPedido>();
+
+        public string ObtenerImagenUrl()
+        {
+            if (string.IsNullOrWhiteSpace(ImagenUrl))
+            {
+                return "/images/default-product.svg";
+            }
+
+            var url = ImagenUrl.Trim();
+
+            // Detect and convert Google Drive share links
+            if (url.Contains("drive.google.com", StringComparison.OrdinalIgnoreCase))
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(url, @"/d/([a-zA-Z0-9_-]+)");
+                if (match.Success)
+                {
+                    return $"https://lh3.googleusercontent.com/d/{match.Groups[1].Value}";
+                }
+                var idMatch = System.Text.RegularExpressions.Regex.Match(url, @"[?&]id=([a-zA-Z0-9_-]+)");
+                if (idMatch.Success)
+                {
+                    return $"https://lh3.googleusercontent.com/d/{idMatch.Groups[1].Value}";
+                }
+            }
+
+            if (url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                url.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
+                url.StartsWith("//") ||
+                url.StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+            {
+                return url;
+            }
+
+            if (url.StartsWith("~/"))
+            {
+                return url.Substring(1);
+            }
+
+            if (!url.StartsWith("/"))
+            {
+                return "/" + url;
+            }
+
+            return url;
+        }
     }
 }
 

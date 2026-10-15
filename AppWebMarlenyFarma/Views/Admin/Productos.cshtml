@@ -66,8 +66,8 @@
                         var esBajoStock = prod.Stock < 10;
                         <tr>
                             <td>
-                                <img src="@(string.IsNullOrEmpty(prod.ImagenUrl) ? "https://via.placeholder.com/60?text=P" : prod.ImagenUrl)" 
-                                     alt="@prod.Nombre" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;" />
+                                <img src="@prod.ObtenerImagenUrl()" 
+                                     alt="@prod.Nombre" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: contain; background-color: #fff;" onerror="this.onerror=null; this.src='/images/default-product.svg';" />
                             </td>
                             <td>
                                 <div class="fw-bold">@prod.Nombre</div>

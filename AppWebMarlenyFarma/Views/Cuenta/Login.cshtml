@@ -1,4 +1,4 @@
-﻿@model AppWebMarlenyFarma.Controllers.LoginViewModel
+@model AppWebMarlenyFarma.Controllers.LoginViewModel
 
 @{
     ViewData["Title"] = "Ingresar - MarlenyFarma";
@@ -21,16 +21,16 @@
 
                         <div class="mb-3">
                             <label class="form-label">Correo Electrónico*</label>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" asp-for="Email" class="form-control" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Contraseña*</label>
-                            <input type="password" name="contrasena" class="form-control" required>
+                            <input type="password" asp-for="Contrasena" class="form-control" required>
                         </div>
 
                         <div class="mb-3 form-check">
-                            <input type="checkbox" name="recuerdaMe" class="form-check-input" id="recuerdaMe">
+                            <input type="checkbox" asp-for="RecuerdaMe" value="true" class="form-check-input" id="recuerdaMe">
                             <label class="form-check-label" for="recuerdaMe">
                                 Recuérdame
                             </label>
