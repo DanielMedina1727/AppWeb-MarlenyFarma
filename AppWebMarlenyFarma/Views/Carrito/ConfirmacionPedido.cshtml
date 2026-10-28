@@ -13,7 +13,7 @@
                     <div class="alert alert-info"><strong>Número de Pedido:</strong> #@Model.PedidoId<br><strong>Fecha:</strong> @Model.FechaPedido.ToString("dd/MM/yyyy HH:mm")</div>
                     <div class="card bg-light mb-4">
                         <div class="card-body">
-                            <h6 class="fw-bold mb-3">Detalles del Envío</h6>
+                            <h3 class="h6 fw-bold mb-3">Detalles del Envío</h3>
                             <p class="mb-2"><strong>Nombre:</strong> @Model.NombreCliente</p>
                             <p class="mb-2"><strong>Email:</strong> @Model.Email</p>
                             <p class="mb-2"><strong>Teléfono:</strong> @Model.Telefono</p>
@@ -40,8 +40,8 @@
                         var total = subtotal + igv + envio;
                     }
                     <div class="row mb-4">
-                        <div class="col-md-6 text-end"><p>Subtotal:</p><p>IGV (18%):</p><p>Envío:</p><h6 class="fw-bold text-success">Total:</h6></div>
-                        <div class="col-md-6"><p><strong>S/ @subtotal.ToString("F2")</strong></p><p><strong>S/ @igv.ToString("F2")</strong></p><p><strong>S/ @envio.ToString("F2")</strong></p><h5 class="text-success fw-bold">S/ @total.ToString("F2")</h5></div>
+                        <div class="col-md-6 text-end"><p>Subtotal:</p><p>IGV (18%):</p><p>Envío:</p><h3 class="h6 fw-bold text-success">Total:</h3></div>
+                        <div class="col-md-6"><p><strong>S/ @subtotal.ToString("F2")</strong></p><p><strong>S/ @igv.ToString("F2")</strong></p><p><strong>S/ @envio.ToString("F2")</strong></p><h2 class="h5 text-success fw-bold">S/ @total.ToString("F2")</h2></div>
                     </div>
                     <div class="alert alert-success"><i class="fas fa-info-circle"></i> Tu pedido será procesado en las próximas 24 horas. Recibirás un email de confirmación con el número de seguimiento.</div>
                     <div><a href="@Url.Action("Index", "Home")" class="btn btn-success btn-lg"><i class="fas fa-home"></i> Volver al Inicio</a> <a href="@Url.Action("Index", "Productos")" class="btn btn-outline-success btn-lg"><i class="fas fa-shopping-bag"></i> Continuar Comprando</a></div>

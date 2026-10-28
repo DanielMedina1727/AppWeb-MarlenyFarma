@@ -8,13 +8,13 @@
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5><i class="fas fa-map-marker-alt text-success"></i> Dirección</h5>
+                    <h2 class="h5"><i class="fas fa-map-marker-alt text-success"></i> Dirección</h2>
                     <p>Jr. Conquistadores 163, Cajamarca - Perú</p>
-                    <h5><i class="fas fa-phone-alt text-success"></i> Teléfono</h5>
+                    <h2 class="h5"><i class="fas fa-phone-alt text-success"></i> Teléfono</h2>
                     <p>+51 928 069 908</p>
-                    <h5><i class="fas fa-envelope text-success"></i> Email</h5>
+                    <h2 class="h5"><i class="fas fa-envelope text-success"></i> Email</h2>
                     <p>atencion@marlenyfarma.com</p>
-                    <h5><i class="fas fa-clock text-success"></i> Horario</h5>
+                    <h2 class="h5"><i class="fas fa-clock text-success"></i> Horario</h2>
                     <p>Lunes a Domingo: 8:00 am - 11:00 pm</p>
                 </div>
             </div>
@@ -22,19 +22,19 @@
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="mb-3">Envíanos un mensaje</h5>
+                    <h2 class="h5 mb-3">Envíanos un mensaje</h2>
                     <form>
                         <div class="mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" required>
+                            <label class="form-label" for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" autocomplete="name" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required>
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" autocomplete="email" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Mensaje</label>
-                            <textarea class="form-control" rows="4" required></textarea>
+                            <label class="form-label" for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" class="form-control" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Enviar</button>
                     </form>
