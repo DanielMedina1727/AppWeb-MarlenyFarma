@@ -13,14 +13,14 @@
     <form asp-action="CrearCategoria" method="post">
         <div class="row g-3">
             <div class="col-md-12">
-                <label class="form-label fw-bold">Nombre de la Categoría*</label>
-                <input asp-for="Nombre" class="form-control" placeholder="Ej. Antibióticos" required />
+                <label class="form-label fw-bold" for="Nombre">Nombre de la Categoría*</label>
+                <input asp-for="Nombre" id="Nombre" class="form-control" placeholder="Ej. Antibióticos" required />
                 <span asp-validation-for="Nombre" class="text-danger small"></span>
             </div>
 
             <div class="col-md-12">
-                <label class="form-label fw-bold">Descripción*</label>
-                <textarea asp-for="Descripcion" class="form-control" rows="3" placeholder="Ej. Medicinas para contrarrestar infecciones bacterianas..." required></textarea>
+                <label class="form-label fw-bold" for="Descripcion">Descripción*</label>
+                <textarea asp-for="Descripcion" id="Descripcion" class="form-control" rows="3" placeholder="Ej. Medicinas para contrarrestar infecciones bacterianas..." required></textarea>
                 <span asp-validation-for="Descripcion" class="text-danger small"></span>
             </div>
 

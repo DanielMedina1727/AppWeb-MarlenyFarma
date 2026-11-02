@@ -1,18 +1,29 @@
+using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
+
 namespace AppWebMarlenyFarma.Models
 {
     public class Producto
     {
+        [JsonRequired]
         public int ProductoId { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
+        [JsonRequired]
         public decimal Precio { get; set; }
+        [JsonRequired]
         public decimal PrecioOriginal { get; set; }
+        [JsonRequired]
         public int Stock { get; set; }
         public string? ImagenUrl { get; set; }
+        [JsonRequired]
         public bool EsDestacado { get; set; }
+        [JsonRequired]
         public bool RequiereReceta { get; set; }
+        [JsonRequired]
         public int CategoriaId { get; set; }
         public int? ProveedorId { get; set; }
+        [JsonRequired]
         public DateTime FechaCreacion { get; set; } 
 
         public Categoria? Categoria { get; set; }
@@ -32,12 +43,12 @@ namespace AppWebMarlenyFarma.Models
             // Detect and convert Google Drive share links
             if (url.Contains("drive.google.com", StringComparison.OrdinalIgnoreCase))
             {
-                var match = System.Text.RegularExpressions.Regex.Match(url, @"/d/([a-zA-Z0-9_-]+)");
+                var match = Regex.Match(url, @"/d/([a-zA-Z0-9_-]+)", RegexOptions.None, TimeSpan.FromSeconds(1));
                 if (match.Success)
                 {
                     return $"https://lh3.googleusercontent.com/d/{match.Groups[1].Value}";
                 }
-                var idMatch = System.Text.RegularExpressions.Regex.Match(url, @"[?&]id=([a-zA-Z0-9_-]+)");
+                var idMatch = Regex.Match(url, @"[?&]id=([a-zA-Z0-9_-]+)", RegexOptions.None, TimeSpan.FromSeconds(1));
                 if (idMatch.Success)
                 {
                     return $"https://lh3.googleusercontent.com/d/{idMatch.Groups[1].Value}";

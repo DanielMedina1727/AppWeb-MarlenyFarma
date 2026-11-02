@@ -57,9 +57,9 @@
             <!-- Formulario de Cambio de Estado -->
             <form action="@Url.Action("ActualizarEstadoPedido", "Admin")" method="post" class="mt-4 p-3 border rounded bg-light">
                 <input type="hidden" name="pedidoId" value="@Model.PedidoId" />
-                <label class="form-label fw-bold text-secondary">Actualizar Estado de Entrega</label>
+                <label class="form-label fw-bold text-secondary" for="estado">Actualizar Estado de Entrega</label>
                 <div class="input-group">
-                    <select name="estado" class="form-select" asp-for="Estado" asp-items="Html.GetEnumSelectList<AppWebMarlenyFarma.Models.EstadoPedido>()">
+                    <select name="estado" id="estado" class="form-select" asp-for="Estado" asp-items="Html.GetEnumSelectList<AppWebMarlenyFarma.Models.EstadoPedido>()">
                     </select>
                     <button class="btn btn-success" type="submit">
                         <i class="fas fa-sync-alt"></i> Actualizar

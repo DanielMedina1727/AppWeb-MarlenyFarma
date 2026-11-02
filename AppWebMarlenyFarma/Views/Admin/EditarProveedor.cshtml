@@ -17,41 +17,41 @@
         <div class="row g-3">
             <!-- Razón Social -->
             <div class="col-md-12">
-                <label class="form-label fw-bold">Razón Social / Nombre del Proveedor*</label>
-                <input asp-for="Nombre" class="form-control" required />
+                <label class="form-label fw-bold" for="Nombre">Razón Social / Nombre del Proveedor*</label>
+                <input asp-for="Nombre" id="Nombre" class="form-control" required />
                 <span asp-validation-for="Nombre" class="text-danger small"></span>
             </div>
 
             <!-- RUC y Persona de Contacto -->
             <div class="col-md-6">
-                <label class="form-label fw-bold">RUC*</label>
-                <input asp-for="Ruc" class="form-control" required maxlength="11" minlength="11" />
+                <label class="form-label fw-bold" for="Ruc">RUC*</label>
+                <input asp-for="Ruc" id="Ruc" class="form-control" required maxlength="11" minlength="11" />
                 <span asp-validation-for="Ruc" class="text-danger small"></span>
             </div>
             
             <div class="col-md-6">
-                <label class="form-label fw-bold">Persona de Contacto</label>
-                <input asp-for="Contacto" class="form-control" />
+                <label class="form-label fw-bold" for="Contacto">Persona de Contacto</label>
+                <input asp-for="Contacto" id="Contacto" class="form-control" />
                 <span asp-validation-for="Contacto" class="text-danger small"></span>
             </div>
 
             <!-- Teléfono y Correo Electrónico -->
             <div class="col-md-6">
-                <label class="form-label fw-bold">Teléfono*</label>
-                <input asp-for="Telefono" class="form-control" required />
+                <label class="form-label fw-bold" for="Telefono">Teléfono*</label>
+                <input asp-for="Telefono" id="Telefono" class="form-control" required />
                 <span asp-validation-for="Telefono" class="text-danger small"></span>
             </div>
             
             <div class="col-md-6">
-                <label class="form-label fw-bold">Correo Electrónico*</label>
-                <input asp-for="Email" type="email" class="form-control" required />
+                <label class="form-label fw-bold" for="Email">Correo Electrónico*</label>
+                <input asp-for="Email" id="Email" type="email" class="form-control" required />
                 <span asp-validation-for="Email" class="text-danger small"></span>
             </div>
 
             <!-- Dirección -->
             <div class="col-md-12">
-                <label class="form-label fw-bold">Dirección Fiscal / Distribuidora</label>
-                <input asp-for="Direccion" class="form-control" />
+                <label class="form-label fw-bold" for="Direccion">Dirección Fiscal / Distribuidora</label>
+                <input asp-for="Direccion" id="Direccion" class="form-control" />
                 <span asp-validation-for="Direccion" class="text-danger small"></span>
             </div>
 

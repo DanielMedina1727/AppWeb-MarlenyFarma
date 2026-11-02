@@ -56,23 +56,9 @@ namespace AppWebMarlenyFarma.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            // Compatibilidad en caso de que el navegador o cliente envíe 'on'
-            if (Request.Form.TryGetValue("recuerdaMe", out var recuerdaMeVal) || Request.Form.TryGetValue("RecuerdaMe", out recuerdaMeVal))
-            {
-                if (string.Equals(recuerdaMeVal.ToString(), "on", StringComparison.OrdinalIgnoreCase))
-                {
-                    model.RecuerdaMe = true;
-                    if (ModelState.ContainsKey(nameof(model.RecuerdaMe)))
-                    {
-                        ModelState[nameof(model.RecuerdaMe)]!.Errors.Clear();
-                        ModelState[nameof(model.RecuerdaMe)]!.ValidationState = Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Valid;
-                    }
-                }
-            }
-
             if (ModelState.IsValid)
             {
-                var resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Contrasena, model.RecuerdaMe, lockoutOnFailure: false);
+                var resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Contrasena, model.RecuerdaMe ?? false, lockoutOnFailure: false);
                 if (resultado.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
@@ -118,7 +104,7 @@ namespace AppWebMarlenyFarma.Controllers
     {
         public string Email { get; set; } = string.Empty;
         public string Contrasena { get; set; } = string.Empty;
-        public bool RecuerdaMe { get; set; }
+        public bool? RecuerdaMe { get; set; }
     }
 
     public class RegistroViewModel
