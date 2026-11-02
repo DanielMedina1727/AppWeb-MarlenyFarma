@@ -15,17 +15,7 @@
         <input type="hidden" asp-for="CategoriaId" />
 
         <div class="row g-3">
-            <div class="col-md-12">
-                <label class="form-label fw-bold" for="Nombre">Nombre de la Categoría*</label>
-                <input asp-for="Nombre" id="Nombre" class="form-control" required />
-                <span asp-validation-for="Nombre" class="text-danger small"></span>
-            </div>
-
-            <div class="col-md-12">
-                <label class="form-label fw-bold" for="Descripcion">Descripción*</label>
-                <textarea asp-for="Descripcion" id="Descripcion" class="form-control" rows="3" required></textarea>
-                <span asp-validation-for="Descripcion" class="text-danger small"></span>
-            </div>
+            <partial name="_CategoriaFields" model="Model" />
 
             <div class="col-md-12 d-flex gap-3 justify-content-end mt-4">
                 <a href="@Url.Action("Categorias", "Admin")" class="btn btn-outline-secondary">
