@@ -5,7 +5,6 @@ namespace AppWebMarlenyFarma.Models
 {
     public class Producto
     {
-        [JsonRequired]
         public int ProductoId { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Descripcion { get; set; } = string.Empty;
@@ -23,8 +22,7 @@ namespace AppWebMarlenyFarma.Models
         [JsonRequired]
         public int CategoriaId { get; set; }
         public int? ProveedorId { get; set; }
-        [JsonRequired]
-        public DateTime FechaCreacion { get; set; } 
+        public DateTime FechaCreacion { get; set; }
 
         public Categoria? Categoria { get; set; }
         public Proveedor? Proveedor { get; set; }
@@ -77,4 +75,3 @@ namespace AppWebMarlenyFarma.Models
         }
     }
 }
-
