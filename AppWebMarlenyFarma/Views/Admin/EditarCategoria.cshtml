@@ -1,4 +1,4 @@
-@model AppWebMarlenyFarma.Models.Categoria
+@model AppWebMarlenyFarma.ViewModels.EditarCategoriaViewModel
 
 @{
     ViewData["Title"] = "Editar Categoría";
@@ -11,14 +11,14 @@
     </h5>
 
     <form asp-action="EditarCategoria" method="post">
-        <!-- Id Oculto -->
         <input type="hidden" asp-for="CategoriaId" />
 
         <div class="row g-3">
             <partial name="_CategoriaFields" model="Model" />
 
             <div class="col-md-12 d-flex gap-3 justify-content-end mt-4">
-                <a href="@Url.Action("Categorias", "Admin")" class="btn btn-outline-secondary">
+                <a href="@Url.Action("Categorias", "Admin")"
+                   class="btn btn-outline-secondary">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-success">

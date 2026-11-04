@@ -1,4 +1,4 @@
-@model AppWebMarlenyFarma.Models.Categoria
+@model AppWebMarlenyFarma.ViewModels.CrearCategoriaViewModel
 
 @{
     ViewData["Title"] = "Crear Nueva Categoría";
@@ -15,7 +15,8 @@
             <partial name="_CategoriaFields" model="Model" />
 
             <div class="col-md-12 d-flex gap-3 justify-content-end mt-4">
-                <a href="@Url.Action("Categorias", "Admin")" class="btn btn-outline-secondary">
+                <a href="@Url.Action("Categorias", "Admin")"
+                   class="btn btn-outline-secondary">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-success">

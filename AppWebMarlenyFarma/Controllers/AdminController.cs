@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AppWebMarlenyFarma.Data;
 using AppWebMarlenyFarma.Models;
+using AppWebMarlenyFarma.ViewModels;
 
 namespace AppWebMarlenyFarma.Controllers
 {
@@ -108,54 +109,127 @@ namespace AppWebMarlenyFarma.Controllers
             return RedirectToAction(nameof(Productos));
         }
 
+
+        // ==========================================
+        // CREACIÓN DE PRODUCTOS
+        // ==========================================
+
         public async Task<IActionResult> CrearProducto()
         {
             ViewBag.Categorias = await _context.Categorias.ToListAsync();
             ViewBag.Proveedores = await _context.Proveedores.ToListAsync();
-            return View();
+
+            return View(new CrearProductoViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearProducto(Producto producto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CrearProducto(CrearProductoViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                producto.FechaCreacion = DateTime.Now;
-                _context.Productos.Add(producto);
-                await _context.SaveChangesAsync();
-                TempData["Mensaje"] = "Producto creado con éxito.";
-                return RedirectToAction(nameof(Productos));
+                ViewBag.Categorias = await _context.Categorias.ToListAsync();
+                ViewBag.Proveedores = await _context.Proveedores.ToListAsync();
+                return View(model);
             }
 
-            ViewBag.Categorias = await _context.Categorias.ToListAsync();
-            ViewBag.Proveedores = await _context.Proveedores.ToListAsync();
-            return View(producto);
+            var producto = new Producto
+            {
+                Nombre = model.Nombre,
+                Descripcion = model.Descripcion,
+                Precio = model.Precio!.Value,
+                PrecioOriginal = model.PrecioOriginal!.Value,
+                Stock = model.Stock!.Value,
+                ImagenUrl = model.ImagenUrl,
+                EsDestacado = model.EsDestacado!.Value,
+                RequiereReceta = model.RequiereReceta!.Value,
+                CategoriaId = model.CategoriaId!.Value,
+                ProveedorId = model.ProveedorId,
+                FechaCreacion = DateTime.Now
+            };
+
+            _context.Productos.Add(producto);
+            await _context.SaveChangesAsync();
+
+            TempData["Mensaje"] = "Producto creado con éxito.";
+
+            return RedirectToAction(nameof(Productos));
         }
+
+        // ==========================================
+        // EDICIÓN DE PRODUCTOS
+        // ==========================================
 
         public async Task<IActionResult> EditarProducto(int id)
         {
             var producto = await _context.Productos.FindAsync(id);
-            if (producto == null) return NotFound();
 
-            ViewBag.Categorias = await _context.Categorias.ToListAsync();
-            ViewBag.Proveedores = await _context.Proveedores.ToListAsync();
-            return View(producto);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EditarProducto(Producto producto)
-        {
-            if (ModelState.IsValid)
+            if (producto == null)
             {
-                _context.Productos.Update(producto);
-                await _context.SaveChangesAsync();
-                TempData["Mensaje"] = "Producto modificado con éxito.";
-                return RedirectToAction(nameof(Productos));
+                return NotFound();
             }
 
             ViewBag.Categorias = await _context.Categorias.ToListAsync();
             ViewBag.Proveedores = await _context.Proveedores.ToListAsync();
-            return View(producto);
+
+            var model = new EditarProductoViewModel
+            {
+                ProductoId = producto.ProductoId,
+                Nombre = producto.Nombre,
+                Descripcion = producto.Descripcion,
+                Precio = producto.Precio,
+                PrecioOriginal = producto.PrecioOriginal,
+                Stock = producto.Stock,
+                ImagenUrl = producto.ImagenUrl,
+                EsDestacado = producto.EsDestacado,
+                RequiereReceta = producto.RequiereReceta,
+                CategoriaId = producto.CategoriaId,
+                ProveedorId = producto.ProveedorId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+   
+        public async Task<IActionResult> EditarProducto(EditarProductoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categorias = await _context.Categorias.ToListAsync();
+                ViewBag.Proveedores = await _context.Proveedores.ToListAsync();
+
+                return View(model);
+            }
+
+            if (model.ProductoId is not int productoId)
+            {
+                return BadRequest();
+            }
+
+            var producto = await _context.Productos.FindAsync(productoId);
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            producto.Nombre = model.Nombre;
+            producto.Descripcion = model.Descripcion;
+            producto.Precio = model.Precio!.Value;
+            producto.PrecioOriginal = model.PrecioOriginal!.Value;
+            producto.Stock = model.Stock!.Value;
+            producto.ImagenUrl = model.ImagenUrl;
+            producto.EsDestacado = model.EsDestacado!.Value;
+            producto.RequiereReceta = model.RequiereReceta!.Value;
+            producto.CategoriaId = model.CategoriaId!.Value;
+            producto.ProveedorId = model.ProveedorId;
+
+            await _context.SaveChangesAsync();
+
+            TempData["Mensaje"] = "Producto modificado con éxito.";
+
+            return RedirectToAction(nameof(Productos));
         }
 
         [HttpPost]
@@ -182,40 +256,80 @@ namespace AppWebMarlenyFarma.Controllers
 
         public IActionResult CrearCategoria()
         {
-            return View();
+            return View(new CrearCategoriaViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearCategoria(Categoria categoria)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CrearCategoria(CrearCategoriaViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Categorias.Add(categoria);
-                await _context.SaveChangesAsync();
-                TempData["Mensaje"] = "Categoría creada con éxito.";
-                return RedirectToAction(nameof(Categorias));
+             
+                return View(model);
             }
-            return View(categoria);
+            var categoria = new Categoria
+            {
+                Nombre = model.Nombre,
+                Descripcion = model.Descripcion,
+                ImagenUrl = model.ImagenUrl
+            };
+
+            _context.Categorias.Add(categoria);
+            await _context.SaveChangesAsync();
+
+            TempData["Mensaje"] = "Categoría creada con éxito.";
+            return RedirectToAction(nameof(Categorias));
         }
 
         public async Task<IActionResult> EditarCategoria(int id)
         {
             var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null) return NotFound();
-            return View(categoria);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            var model = new EditarCategoriaViewModel
+            {
+                CategoriaId = categoria.CategoriaId,
+                Nombre = categoria.Nombre,
+                Descripcion = categoria.Descripcion,
+                ImagenUrl = categoria.ImagenUrl
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarCategoria(Categoria categoria)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarCategoria(EditarCategoriaViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Categorias.Update(categoria);
-                await _context.SaveChangesAsync();
-                TempData["Mensaje"] = "Categoría modificada con éxito.";
-                return RedirectToAction(nameof(Categorias));
+                return View(model);
             }
-            return View(categoria);
+
+            if (model.CategoriaId is not int categoriaId)
+            {
+                return BadRequest();
+            }
+
+            var categoria = await _context.Categorias.FindAsync(categoriaId);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            categoria.Nombre = model.Nombre;
+            categoria.Descripcion = model.Descripcion;
+            categoria.ImagenUrl = model.ImagenUrl;
+
+            await _context.SaveChangesAsync();
+
+            TempData["Mensaje"] = "Categoría modificada con éxito.";
+            return RedirectToAction(nameof(Categorias));
         }
 
         [HttpPost]
