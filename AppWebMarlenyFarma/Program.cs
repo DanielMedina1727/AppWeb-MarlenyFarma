@@ -67,8 +67,9 @@ using (var scope = app.Services.CreateScope())
         var adminUser = await userManager.FindByEmailAsync(adminEmail);
         if (adminUser == null)
         {
+            var adminInitialPass = builder.Configuration["ADMIN_INITIAL_PASSWORD"] ?? "MarlenyFarmaAdmin2026*";
             adminUser = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
-            var result = await userManager.CreateAsync(adminUser, "Admin123*");
+            var result = await userManager.CreateAsync(adminUser, adminInitialPass);
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(adminUser, "Administrador");
@@ -79,8 +80,9 @@ using (var scope = app.Services.CreateScope())
         var clientUser = await userManager.FindByEmailAsync(clientEmail);
         if (clientUser == null)
         {
+            var clientInitialPass = builder.Configuration["CLIENT_INITIAL_PASSWORD"] ?? "MarlenyFarmaCliente2026*";
             clientUser = new IdentityUser { UserName = clientEmail, Email = clientEmail, EmailConfirmed = true };
-            var result = await userManager.CreateAsync(clientUser, "Cliente123*");
+            var result = await userManager.CreateAsync(clientUser, clientInitialPass);
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(clientUser, "Cliente");
