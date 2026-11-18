@@ -31,6 +31,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+    await next();
+});
 app.UseStaticFiles();
 app.UseRouting();
 
