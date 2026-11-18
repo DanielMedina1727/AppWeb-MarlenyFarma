@@ -22,6 +22,8 @@ bld/
 
 ## Publish
 publish/
+publish_manual/
+deploy.zip
 *.Publish.xml
 *.pubxml
 *.azurePubxml
