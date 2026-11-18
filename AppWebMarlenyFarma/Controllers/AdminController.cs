@@ -363,40 +363,70 @@ namespace AppWebMarlenyFarma.Controllers
 
         public IActionResult CrearProveedor()
         {
-            return View();
+            return View(new CrearProveedorViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearProveedor(Proveedor proveedor)
+        public async Task<IActionResult> CrearProveedor(CrearProveedorViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var proveedor = new Proveedor
+                {
+                    Nombre = model.Nombre,
+                    Contacto = model.Contacto ?? string.Empty,
+                    Telefono = model.Telefono,
+                    Email = model.Email,
+                    Direccion = model.Direccion ?? string.Empty,
+                    Ruc = model.Ruc
+                };
                 _context.Proveedores.Add(proveedor);
                 await _context.SaveChangesAsync();
                 TempData["Mensaje"] = "Proveedor registrado con éxito.";
                 return RedirectToAction(nameof(Proveedores));
             }
-            return View(proveedor);
+            return View(model);
         }
 
         public async Task<IActionResult> EditarProveedor(int id)
         {
             var proveedor = await _context.Proveedores.FindAsync(id);
             if (proveedor == null) return NotFound();
-            return View(proveedor);
+
+            var model = new EditarProveedorViewModel
+            {
+                ProveedorId = proveedor.ProveedorId,
+                Nombre = proveedor.Nombre,
+                Contacto = proveedor.Contacto,
+                Telefono = proveedor.Telefono,
+                Email = proveedor.Email,
+                Direccion = proveedor.Direccion,
+                Ruc = proveedor.Ruc
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarProveedor(Proveedor proveedor)
+        public async Task<IActionResult> EditarProveedor(EditarProveedorViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var proveedor = await _context.Proveedores.FindAsync(model.ProveedorId);
+                if (proveedor == null) return NotFound();
+
+                proveedor.Nombre = model.Nombre;
+                proveedor.Contacto = model.Contacto ?? string.Empty;
+                proveedor.Telefono = model.Telefono;
+                proveedor.Email = model.Email;
+                proveedor.Direccion = model.Direccion ?? string.Empty;
+                proveedor.Ruc = model.Ruc;
+
                 _context.Proveedores.Update(proveedor);
                 await _context.SaveChangesAsync();
                 TempData["Mensaje"] = "Proveedor modificado con éxito.";
                 return RedirectToAction(nameof(Proveedores));
             }
-            return View(proveedor);
+            return View(model);
         }
 
         [HttpPost]

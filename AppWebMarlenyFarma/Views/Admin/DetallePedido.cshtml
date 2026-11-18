@@ -22,36 +22,38 @@
             </h5>
             
             <table class="table table-borderless align-middle">
-                <tr>
-                    <td class="fw-bold text-muted" style="width: 140px;">ID Pedido:</td>
-                    <td class="fw-bold">#@Model.PedidoId</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Fecha y Hora:</td>
-                    <td>@Model.FechaPedido.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Total:</td>
-                    <td class="h5 mb-0 fw-bold text-success">S/ @Model.Total.ToString("F2")</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Estado Actual:</td>
-                    <td>
-                        @{
-                            var badgeClass = Model.Estado switch
-                            {
-                                AppWebMarlenyFarma.Models.EstadoPedido.Pendiente => "bg-warning text-dark",
-                                AppWebMarlenyFarma.Models.EstadoPedido.Confirmado => "bg-info text-white",
-                                AppWebMarlenyFarma.Models.EstadoPedido.EnPreparacion => "bg-primary text-white",
-                                AppWebMarlenyFarma.Models.EstadoPedido.Enviado => "bg-secondary text-white",
-                                AppWebMarlenyFarma.Models.EstadoPedido.Entregado => "bg-success text-white",
-                                AppWebMarlenyFarma.Models.EstadoPedido.Cancelado => "bg-danger text-white",
-                                _ => "bg-dark text-white"
-                            };
-                        }
-                        <span class="badge @badgeClass px-3 py-1 fs-6">@Model.Estado</span>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted" style="width: 140px;">ID Pedido:</th>
+                        <td class="fw-bold">#@Model.PedidoId</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Fecha y Hora:</th>
+                        <td>@Model.FechaPedido.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Total:</th>
+                        <td class="h5 mb-0 fw-bold text-success">S/ @Model.Total.ToString("F2")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Estado Actual:</th>
+                        <td>
+                            @{
+                                var badgeClass = Model.Estado switch
+                                {
+                                    AppWebMarlenyFarma.Models.EstadoPedido.Pendiente => "bg-warning text-dark",
+                                    AppWebMarlenyFarma.Models.EstadoPedido.Confirmado => "bg-info text-white",
+                                    AppWebMarlenyFarma.Models.EstadoPedido.EnPreparacion => "bg-primary text-white",
+                                    AppWebMarlenyFarma.Models.EstadoPedido.Enviado => "bg-secondary text-white",
+                                    AppWebMarlenyFarma.Models.EstadoPedido.Entregado => "bg-success text-white",
+                                    AppWebMarlenyFarma.Models.EstadoPedido.Cancelado => "bg-danger text-white",
+                                    _ => "bg-dark text-white"
+                                };
+                            }
+                            <span class="badge @badgeClass px-3 py-1 fs-6">@Model.Estado</span>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
             <!-- Formulario de Cambio de Estado -->
@@ -73,26 +75,28 @@
                 <i class="fas fa-user-circle text-success me-2"></i> Datos de Despacho
             </h5>
             <table class="table table-borderless">
-                <tr>
-                    <td class="fw-bold text-muted" style="width: 140px;">Cliente:</td>
-                    <td>@Model.NombreCliente</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Correo:</td>
-                    <td>@Model.Email</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Teléfono:</td>
-                    <td>@Model.Telefono</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Dirección:</td>
-                    <td>@Model.Direccion</td>
-                </tr>
-                <tr>
-                    <td class="fw-bold text-muted">Notas:</td>
-                    <td class="text-secondary font-italic">@(string.IsNullOrEmpty(Model.Notas) ? "Sin notas adicionales" : Model.Notas)</td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted" style="width: 140px;">Cliente:</th>
+                        <td>@Model.NombreCliente</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Correo:</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Teléfono:</th>
+                        <td>@Model.Telefono</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Dirección:</th>
+                        <td>@Model.Direccion</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="fw-bold text-muted">Notas:</th>
+                        <td class="text-secondary font-italic">@(string.IsNullOrEmpty(Model.Notas) ? "Sin notas adicionales" : Model.Notas)</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

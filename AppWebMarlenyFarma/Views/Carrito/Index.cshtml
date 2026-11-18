@@ -1,4 +1,4 @@
-﻿@model AppWebMarlenyFarma.Models.Carrito
+@model AppWebMarlenyFarma.Models.Carrito
 @{
     ViewData["Title"] = "Mi Carrito - MarlenyFarma";
 }
@@ -38,7 +38,8 @@
                                             <form method="post" action="@Url.Action("ActualizarCantidad", "Carrito")" class="d-inline">
                                                 <input type="hidden" name="itemId" value="@item.ItemCarritoId" />
                                                 <div class="input-group" style="width: 100px;">
-                                                    <input type="number" name="cantidad" class="form-control" value="@item.Cantidad" min="1" max="@item.Producto?.Stock" />
+                                                    <label for="cantidad-@item.ItemCarritoId" class="visually-hidden">Cantidad</label>
+                                                    <input type="number" id="cantidad-@item.ItemCarritoId" name="cantidad" class="form-control" value="@item.Cantidad" min="1" max="@item.Producto?.Stock" />
                                                     <button type="submit" class="btn btn-outline-secondary btn-sm"><i class="fas fa-sync"></i></button>
                                                 </div>
                                             </form>

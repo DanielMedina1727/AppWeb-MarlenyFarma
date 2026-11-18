@@ -26,7 +26,8 @@
         <!-- Búsqueda -->
         <form method="get" class="d-flex flex-grow-1 max-w-500">
             <div class="input-group">
-                <input type="text" name="busqueda" value="@ViewBag.Busqueda" class="form-control" placeholder="Buscar por nombre o descripción..." />
+                <label for="busquedaProductos" class="visually-hidden">Buscar productos</label>
+                <input type="text" id="busquedaProductos" name="busqueda" value="@ViewBag.Busqueda" class="form-control" placeholder="Buscar por nombre o descripción..." />
                 <button class="btn btn-success" type="submit">
                     <i class="fas fa-search"></i> Buscar
                 </button>
@@ -139,7 +140,8 @@
                                     <form action="@Url.Action("ActualizarStock", "Admin")" method="post" class="p-2 border rounded bg-light">
                                         <input type="hidden" name="productoId" value="@prod.ProductoId" />
                                         <div class="input-group input-group-sm">
-                                            <input type="number" name="stockAdicional" class="form-control" placeholder="Cant." min="1" required style="max-width: 80px;" />
+                                            <label for="stockAdicional-@prod.ProductoId" class="visually-hidden">Stock Adicional</label>
+                                            <input type="number" id="stockAdicional-@prod.ProductoId" name="stockAdicional" class="form-control" placeholder="Cant." min="1" required style="max-width: 80px;" />
                                             <button class="btn btn-success" type="submit">Agregar</button>
                                         </div>
                                     </form>

@@ -44,7 +44,7 @@ jobs:
 
       - name: 📊 Resumen de cobertura
         if: always()
-        uses: irongut/CodeCoverageSummary@v1.3.0
+        uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95 # v1.3.0
         with:
           filename: TestResults/**/coverage.cobertura.xml
           badge: true
@@ -113,7 +113,7 @@ jobs:
           -o ./publish
 
       - name: 🚀 Subir a MonsterASP via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}

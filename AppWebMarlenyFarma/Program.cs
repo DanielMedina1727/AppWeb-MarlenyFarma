@@ -49,7 +49,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var dbContext = services.GetRequiredService<FarmaDbContext>();
-        dbContext.Database.Migrate();
+        await dbContext.Database.MigrateAsync();
 
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
@@ -57,33 +57,33 @@ using (var scope = app.Services.CreateScope())
         string[] roles = { "Administrador", "Cliente" };
         foreach (var role in roles)
         {
-            if (!roleManager.RoleExistsAsync(role).GetAwaiter().GetResult())
+            if (!await roleManager.RoleExistsAsync(role))
             {
-                roleManager.CreateAsync(new IdentityRole(role)).GetAwaiter().GetResult();
+                await roleManager.CreateAsync(new IdentityRole(role));
             }
         }
 
         var adminEmail = "admin@marlenyfarma.com";
-        var adminUser = userManager.FindByEmailAsync(adminEmail).GetAwaiter().GetResult();
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
         if (adminUser == null)
         {
             adminUser = new IdentityUser { UserName = adminEmail, Email = adminEmail, EmailConfirmed = true };
-            var result = userManager.CreateAsync(adminUser, "Admin123*").GetAwaiter().GetResult();
+            var result = await userManager.CreateAsync(adminUser, "Admin123*");
             if (result.Succeeded)
             {
-                userManager.AddToRoleAsync(adminUser, "Administrador").GetAwaiter().GetResult();
+                await userManager.AddToRoleAsync(adminUser, "Administrador");
             }
         }
 
         var clientEmail = "cliente@marlenyfarma.com";
-        var clientUser = userManager.FindByEmailAsync(clientEmail).GetAwaiter().GetResult();
+        var clientUser = await userManager.FindByEmailAsync(clientEmail);
         if (clientUser == null)
         {
             clientUser = new IdentityUser { UserName = clientEmail, Email = clientEmail, EmailConfirmed = true };
-            var result = userManager.CreateAsync(clientUser, "Cliente123*").GetAwaiter().GetResult();
+            var result = await userManager.CreateAsync(clientUser, "Cliente123*");
             if (result.Succeeded)
             {
-                userManager.AddToRoleAsync(clientUser, "Cliente").GetAwaiter().GetResult();
+                await userManager.AddToRoleAsync(clientUser, "Cliente");
             }
         }
     }
@@ -93,4 +93,4 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.Run();
+await app.RunAsync();
