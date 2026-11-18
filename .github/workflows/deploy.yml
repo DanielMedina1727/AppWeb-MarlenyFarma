@@ -117,9 +117,54 @@ jobs:
           -o ./publish
 
       - name: ⏸️ Liberar archivos bloqueados en IIS (app_offline.htm)
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Actualizando</title></head><body><h2>Actualizando sitio...</h2></body></html>' > app_offline.htm
-          curl --retry 3 --ftp-create-dirs -T app_offline.htm --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}/wwwroot/app_offline.htm" || true
+          python3 - << 'EOF'
+          import os, sys
+          from ftplib import FTP, FTP_TLS
+
+          host = os.environ.get("FTP_SERVER", "")
+          user = os.environ.get("FTP_USERNAME", "")
+          passwd = os.environ.get("FTP_PASSWORD", "")
+
+          if not host or not user or not passwd:
+              print("ℹ️ Credenciales FTP incompletas, omitiendo subida de app_offline.htm")
+              sys.exit(0)
+
+          ftp = None
+          try:
+              ftp = FTP_TLS()
+              ftp.connect(host, 21, timeout=15)
+              ftp.login(user, passwd)
+              ftp.prot_p()
+              print("🔒 Conexión segura FTPS establecida.")
+          except Exception as e:
+              print(f"ℹ️ FTPS no disponible ({e}), conectando por FTP estándar...")
+              try:
+                  ftp = FTP()
+                  ftp.connect(host, 21, timeout=15)
+                  ftp.login(user, passwd)
+              except Exception as err:
+                  print(f"⚠️ No se pudo conectar vía FTP: {err}")
+                  sys.exit(0)
+
+          try:
+              with open("app_offline.htm", "rb") as f:
+                  ftp.storbinary("STOR /wwwroot/app_offline.htm", f)
+              print("✅ app_offline.htm colocado con éxito.")
+          except Exception as e:
+              print(f"⚠️ No se pudo guardar app_offline.htm: {e}")
+          finally:
+              try:
+                  ftp.quit()
+              except Exception:
+                  pass
+          EOF
           sleep 3
 
       - name: 🚀 Subir a MonsterASP via FTP
@@ -134,5 +179,46 @@ jobs:
 
       - name: ▶️ Reactivar sitio (eliminar app_offline.htm)
         if: always()
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          curl --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}/" -Q "DELE /wwwroot/app_offline.htm" || true
+          python3 - << 'EOF'
+          import os, sys
+          from ftplib import FTP, FTP_TLS
+
+          host = os.environ.get("FTP_SERVER", "")
+          user = os.environ.get("FTP_USERNAME", "")
+          passwd = os.environ.get("FTP_PASSWORD", "")
+
+          if not host or not user or not passwd:
+              sys.exit(0)
+
+          ftp = None
+          try:
+              ftp = FTP_TLS()
+              ftp.connect(host, 21, timeout=15)
+              ftp.login(user, passwd)
+              ftp.prot_p()
+          except Exception:
+              try:
+                  ftp = FTP()
+                  ftp.connect(host, 21, timeout=15)
+                  ftp.login(user, passwd)
+              except Exception as err:
+                  print(f"⚠️ No se pudo conectar para reactivar: {err}")
+                  sys.exit(0)
+
+          try:
+              ftp.delete("/wwwroot/app_offline.htm")
+              print("✅ app_offline.htm eliminado. Sitio reactivado correctamente.")
+          except Exception as e:
+              print(f"ℹ️ app_offline.htm ya no estaba presente o no se eliminó: {e}")
+          finally:
+              try:
+                  ftp.quit()
+              except Exception:
+                  pass
+          EOF
