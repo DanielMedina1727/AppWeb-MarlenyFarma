@@ -116,17 +116,30 @@ jobs:
           --self-contained true
           -o ./publish
 
-      - name: ⏸️ Liberar archivos bloqueados en IIS (app_offline.htm)
+      - name: ⏸️ Preparar app_offline.htm localmente
         shell: bash
-        env:
-          FTP_USER: ${{ secrets.FTP_USERNAME }}
-          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
-          FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
-          echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Actualizando</title></head><body><h2>Actualizando sitio...</h2></body></html>' > app_offline.htm
-          PROTOCOL="ftp"
-          curl --ssl -k --retry 3 --retry-delay 2 --ftp-create-dirs -T app_offline.htm --user "$FTP_USER:$FTP_PASS" "${PROTOCOL}://${FTP_HOST}/wwwroot/app_offline.htm" || true
-          sleep 6
+          mkdir -p ./offline_deploy
+          cat > ./offline_deploy/app_offline.htm << 'HTMLEOF'
+          <!DOCTYPE html><html><head><meta charset="utf-8"><title>Actualizando</title></head><body><h2>Actualizando sitio...</h2></body></html>
+          HTMLEOF
+
+      - name: ⏸️ Subir app_offline.htm via FTP para liberar IIS
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./offline_deploy/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/wwwroot/' }}
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+
+      - name: ⏳ Esperar a que IIS libere los archivos
+        shell: bash
+        run: sleep 15
 
       - name: 🚀 Subir a MonsterASP via FTP
         uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
@@ -146,5 +159,5 @@ jobs:
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
           FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
-          PROTOCOL="ftp"
-          curl --ssl -k --user "$FTP_USER:$FTP_PASS" "${PROTOCOL}://${FTP_HOST}/" -Q "DELE /wwwroot/app_offline.htm" || true
+          curl -k --ssl --user "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" -Q "DELE /wwwroot/app_offline.htm" || \
+          curl -k --user "$FTP_USER:$FTP_PASS" "ftp://$FTP_HOST/" -Q "DELE /wwwroot/app_offline.htm" || true
