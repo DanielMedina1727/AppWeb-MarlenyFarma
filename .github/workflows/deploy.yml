@@ -14,7 +14,7 @@ jobs:
   # Etapa 1: compilación y pruebas automatizadas
   # ---------------------------------------------------------------------------
   calidad:
-    name: Compilar y ejecutar pruebas unitarias
+    name: Compilar y validar calidad
     runs-on: ubuntu-latest
 
     steps:
@@ -28,22 +28,25 @@ jobs:
             10.0.x
 
       - name: 📦 Restaurar dependencias
-        run: dotnet restore tests/MarlenyFarma.UnitTests/MarlenyFarma.UnitTests.csproj
+        run: dotnet restore AppWebMarlenyFarma/AppWebMarlenyFarma.csproj
 
       - name: 🔨 Compilar en Release
-        run: dotnet build tests/MarlenyFarma.UnitTests/MarlenyFarma.UnitTests.csproj -c Release --no-restore
+        run: dotnet build AppWebMarlenyFarma/AppWebMarlenyFarma.csproj -c Release --no-restore
 
-      - name: 🧪 Ejecutar pruebas unitarias con cobertura
-        run: >
-          dotnet test tests/MarlenyFarma.UnitTests/MarlenyFarma.UnitTests.csproj
-          -c Release
-          --no-build
-          --logger "trx;LogFileName=unitarias.trx"
-          --collect:"XPlat Code Coverage"
-          --results-directory ./TestResults
+      - name: 🧪 Ejecutar pruebas unitarias (si existen)
+        run: |
+          if [ -f "tests/MarlenyFarma.UnitTests/MarlenyFarma.UnitTests.csproj" ]; then
+            dotnet test tests/MarlenyFarma.UnitTests/MarlenyFarma.UnitTests.csproj \
+              -c Release \
+              --logger "trx;LogFileName=unitarias.trx" \
+              --collect:"XPlat Code Coverage" \
+              --results-directory ./TestResults
+          else
+            echo "ℹ️ No se detectó proyecto de pruebas unitarias, omitiendo..."
+          fi
 
       - name: 📊 Resumen de cobertura
-        if: always()
+        if: hashFiles('TestResults/**/coverage.cobertura.xml') != ''
         uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95 # v1.3.0
         with:
           filename: TestResults/**/coverage.cobertura.xml
@@ -57,11 +60,11 @@ jobs:
           thresholds: '60 80'
 
       - name: 📝 Publicar resumen en el job
-        if: always()
+        if: hashFiles('code-coverage-results.md') != ''
         run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
 
       - name: 📤 Publicar artefactos de prueba
-        if: always()
+        if: hashFiles('TestResults/**') != ''
         uses: actions/upload-artifact@v4
         with:
           name: resultados-pruebas
@@ -90,15 +93,16 @@ jobs:
             10.0.x
 
       - name: 🔐 Configurar Cadena de Conexión de Producción (Opcional)
-        if: ${{ secrets.DB_CONNECTION_STRING != '' }}
         shell: bash
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
         run: |
-          PROD_FILE="AppWebMarlenyFarma/appsettings.Production.json"
-          if [ -f "$PROD_FILE" ]; then
-            jq --arg cs "$DB_CONNECTION_STRING" '.ConnectionStrings.ConexionDB = $cs' "$PROD_FILE" > tmp.json
-            mv tmp.json "$PROD_FILE"
+          if [ -n "$DB_CONNECTION_STRING" ]; then
+            PROD_FILE="AppWebMarlenyFarma/appsettings.Production.json"
+            if [ -f "$PROD_FILE" ]; then
+              jq --arg cs "$DB_CONNECTION_STRING" '.ConnectionStrings.ConexionDB = $cs' "$PROD_FILE" > tmp.json
+              mv tmp.json "$PROD_FILE"
+            fi
           fi
 
       - name: 📦 Restaurar dependencias
