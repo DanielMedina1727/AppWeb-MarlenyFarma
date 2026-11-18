@@ -45,17 +45,39 @@ header {
         color: var(--success) !important;
     }
 
+.navbar-nav .nav-link.btn-success,
 .navbar-nav .btn-success {
     background-color: var(--success) !important;
     border-color: var(--success) !important;
+    color: #ffffff !important;
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
+    .navbar-nav .nav-link.btn-success:hover,
     .navbar-nav .btn-success:hover {
         background-color: var(--success-dark) !important;
+        border-color: var(--success-dark) !important;
+        color: #ffffff !important;
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(46, 57, 125, 0.3);
+    }
+
+.navbar-nav .nav-link.btn-outline-success,
+.navbar-nav .btn-outline-success {
+    color: var(--success) !important;
+    border-color: var(--success) !important;
+    background-color: transparent !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .navbar-nav .nav-link.btn-outline-success:hover,
+    .navbar-nav .btn-outline-success:hover {
+        background-color: var(--success) !important;
+        border-color: var(--success) !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
     }
 
 /* Hero Banner */

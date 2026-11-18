@@ -4,7 +4,7 @@
     var categorias = ViewBag.Categorias as List<AppWebMarlenyFarma.Models.Categoria>;
 }
 
-<section class="hero-banner bg-gradient-success text-white py-5">
+<section id="inicio" class="hero-banner bg-gradient-success text-white py-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -13,7 +13,7 @@
                 <a href="@Url.Action("Index", "Productos")" class="btn btn-light btn-lg mt-3">Explorar Productos</a>
             </div>
             <div class="col-md-6 text-center">
-                <img src="~/images/logo-marleny.png" alt="Logo" class="img-fluid" style="max-height: 200px;" />
+                <img src="~/images/logo-marleny.png" alt="Botica Marleny Farma - Calidad, experiencia y garantía" class="img-fluid" style="max-height: 200px;" />
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@
     <div class="container text-center">
         <h2 class="fw-bold mb-3">¿Necesitas Ayuda?</h2>
         <p class="lead mb-4">Contáctanos y nuestro equipo te atenderá con gusto</p>
-        <a href="/" class="btn btn-light btn-lg">
+        <a href="@Url.Action("Contacto", "Home")" class="btn btn-light btn-lg">
             <i class="fas fa-envelope"></i> Contactar
         </a>
     </div>
